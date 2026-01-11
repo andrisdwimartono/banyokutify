@@ -1,37 +1,75 @@
 export default {
-    sidebar: {
-        home: 'Home',
-        dashboard: 'Dashboard',
-        administrations: 'Administrations',
-        user: 'User',
+  sidebar: {
+    home: 'Home',
+    dashboard: 'Dashboard',
+
+    stock: {
+      _label: 'Stock',
+
+      master: {
+        _label: 'Master',
         product: 'Product',
+        warehouse: 'Warehouse',
         category: 'Category',
-        order: 'Order',
-        setting: 'Setting',
-        auth: 'Auth',
-        sales: 'Sales',
-        stock: 'Stock',
-        accounting: 'Accounting',
-        codeOfAccount: 'Code of Account',
-    },
-    login: {
-        email: 'Email',
-        password: 'Password',
-        login: 'Login',
-        register: 'Register',
-        forgotPassword: 'Forgot Password',
-    },
-    register: {
-        email: 'Email',
-        password: 'Password',
-        confirmPassword: 'Confirm Password',
-        register: 'Register',
-        login: 'Login',
-    },
-    forgotPassword: {
-        email: 'Email',
-        forgotPassword: 'Forgot Password',
-        login: 'Login',
+      },
+
+      transaction: {
+        _label: 'Transaction',
+        transferWarehouse: 'Transfer Warehouse',
+        stockEntry: 'Stock Entry',
+      },
+
+      tools: {
+        _label: 'Tools',
+        stockOpname: 'Stock Opname',
+        rebuildStock: 'Rebuild Stock',
+      },
+
+      report: {
+        _label: 'Report',
+        stockBalance: 'Stock Balance',
+        stockCard: 'Stock Card',
+      },
     },
 
+    accounting: {
+      _label: 'Accounting',
+
+      master: {
+        _label: 'Master',
+        codeOfAccount: 'Code of Account',
+      },
+
+      transaction: {
+        _label: 'Transaction',
+        journal: 'Journal',
+      },
+
+      report: {
+        _label: 'Report',
+        balanceSheet: 'Balance Sheet',
+        profitLoss: 'Profit and Loss',
+      },
+    },
+
+    auth: {
+      _label: 'Auth',
+      master: {
+        _label: 'Master',
+        user: 'User',
+      },
+    },
+  },
+
+  login: {
+    signIn: 'Sign In',
+    email: 'Email',
+    password: 'Password',
+    login: 'Login',
+    register: 'Register',
+    forgotPassword: 'Forgot Password',
+    invalidEmailOrPassword: 'Invalid email or password',
+    orLoginUsing: 'Or login using',
+    title: 'Trading Management System',
+  },
 }

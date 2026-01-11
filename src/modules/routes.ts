@@ -5,11 +5,13 @@ export default [
     path: '/',
     titleKey: 'sidebar.home',
     icon: 'mdi-warehouse',
+    component: Home,
     meta: {
       requiresAuth: true,
-      roles: ['ABC'],
-      layout: 'main'
-    },
-    component: Home
+      // stay empty to allow all roles
+      roles: [],
+      layout: 'main',
+      isSidebar: true
+    }
   },
 ]

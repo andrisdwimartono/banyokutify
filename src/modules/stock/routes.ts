@@ -4,47 +4,51 @@ import WarehousesList from './pages/master/WarehousesList.vue'
 export default [
   {
     path: '/stock',
-    titleKey: 'sidebar.stock',
+    titleKey: 'sidebar.stock._label',
     icon: 'mdi-warehouse',
     meta: {
       requiresAuth: true,
       roles: ['ADMIN', 'ABC'],
-      layout: 'main'
+      layout: 'main',
+      isSidebar: true
     },
     children: [
       {
         path: 'master',
-        titleKey: 'sidebar.stock.master',
+        titleKey: 'sidebar.stock.master._label',
         icon: 'mdi-database',
         meta: {
           requiresAuth: true,
           roles: ['ADMIN', 'ABC'],
-          layout: 'main'
+          layout: 'main',
+          isSidebar: true
         },
         children: [
           {
             path: 'product',
-            name: 'stock.master.product',
-            titleKey: 'stock.master.products',
+            name: 'sidebar.stock.master.product',
+            titleKey: 'sidebar.stock.master.product',
             icon: 'mdi-package-variant',
+            component: ProductsList,
             meta: {
               requiresAuth: true,
               roles: ['ADMIN', 'ABC'],
-              layout: 'main'
-            },
-            component: ProductsList
+              layout: 'main',
+              isSidebar: true
+            }
           },
           {
             path: 'warehouse',
-            name: 'stock.master.warehouse',
-            titleKey: 'stock.master.warehouse',
+            name: 'sidebar.stock.master.warehouse',
+            titleKey: 'sidebar.stock.master.warehouse',
             icon: 'mdi-home-group',
+            component: WarehousesList,
             meta: {
               requiresAuth: true,
               roles: ['ADMIN', 'ABC'],
-              layout: 'main'
-            },
-            component: WarehousesList
+              layout: 'main',
+              isSidebar: true
+            }
           }
         ]
       }

@@ -17,11 +17,11 @@
 
       <!-- Title -->
       <v-card-title class="text-h5 font-weight-bold text-center mb-2">
-        Sign In
+        {{ t('login.signIn') }}
       </v-card-title>
 
       <v-card-subtitle class="text-center mb-6">
-        Trading Management System
+        {{ t('login.title') }}
       </v-card-subtitle>
 
       <v-alert
@@ -30,7 +30,7 @@
         variant="tonal"
         class="mb-4"
       >
-        Invalid email or password
+        {{ t('login.invalidEmailOrPassword') }}
       </v-alert>
 
       <!-- Form -->
@@ -47,7 +47,7 @@
 
         <v-text-field
           v-model="form.password"
-          label="Password"
+          :label="t('login.password')"
           prepend-inner-icon="mdi-lock"
           variant="outlined"
           :rules="passwordRules"
@@ -65,7 +65,7 @@
           type="submit"
           :loading="loading"
         >
-          Login
+          {{t('login.login')}}
         </v-btn>
 
         <div class="d-flex justify-end">
@@ -74,14 +74,14 @@
             class="text-decoration-none text-caption"
             to="/forgot-password"
           >
-            Forgot Password?
+            {{ t('login.forgotPassword') }}?
           </v-btn>
         </div>
       </v-form>
 
       <!-- Or login using -->
       <div class="text-center mt-4">
-        Or login using
+        {{ t('login.orLoginUsing') }}
       </div>
       
       <!-- google and facebook icon circle, not full width -->
@@ -119,6 +119,9 @@ import { ref } from 'vue'
 import { authApi } from '@/services/api/auth.api'
 import { useAuthStore } from '@/stores/auth.store'
 import router from '@/router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const loading = ref(false)
 const formRef = ref()
@@ -152,25 +155,24 @@ async function onSubmit() {
     const res = await authApi.login(form.value)
     
     if(res.status === 200) {
-      router.push('/home')
+      router.push('/')
     }else{
       errorShow.value = true
     }
 
     auth.setAuth({
-      id: res.data.id,
-      email: res.data.email,
-      roles: res.data.roles,
-      fullName: res.data.fullName || '',
-      profilePicture: res.data.profilePicture || '',
-      profilePictureUrl: res.data.profilePictureUrl || '',
-      merchantId: res.data.merchantId || '',
-      merchantName: res.data.merchantName || '',
-      accessToken: res.data.accessToken,
-      refreshToken: res.data.refreshToken
+      id: res.data.data.id,
+      email: res.data.data.email,
+      roles: res.data.data.roles,
+      fullName: res.data.data.fullName || '',
+      profilePicture: res.data.data.profilePicture || '',
+      profilePictureUrl: res.data.data.profilePictureUrl || '',
+      merchantId: res.data.data.merchantId || '',
+      merchantName: res.data.data.merchantName || '',
+      accessToken: res.data.data.accessToken,
+      refreshToken: res.data.data.refreshToken
     })
   } catch (error) {
-    console.log(error)
     errorShow.value = true
   } finally {
     loading.value = false

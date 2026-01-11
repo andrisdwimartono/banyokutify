@@ -10,7 +10,7 @@
 
         <v-list>
           <SidebarItem
-            v-for="menu in sidebarMenu.filter((menu) => menu.meta?.requiresAuth)"
+            v-for="menu in sidebarMenu.filter((menu) => menu.meta?.isSidebar)"
             :key="menu.path"
             :item="menu"
           />

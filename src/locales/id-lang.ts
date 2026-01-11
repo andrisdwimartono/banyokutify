@@ -1,39 +1,75 @@
 export default {
-    sidebar: {
-        home: 'Beranda',
-        dashboard: 'Dashboard',
-        administrations: 'Administrasi',
-        user: 'Pengguna',
+  sidebar: {
+    home: 'Beranda',
+    dashboard: 'Dashboard',
+
+    stock: {
+      _label: 'Stok',
+
+      master: {
+        _label: 'Master',
         product: 'Produk',
+        warehouse: 'Gudang',
         category: 'Kategori',
-        order: 'Pesanan',
-        setting: 'Pengaturan',
-        auth: 'Auth',
-        sales: 'Penjualan',
-        stock: 'Stok',
-        'stock.master': 'Master',
-        'stock.master.products': 'Produk',
-        accounting: 'Akuntansi',
-        'accounting.master': 'Master',
-        'accounting.master.codeOfAccount': 'Kode Akun',
+      },
+
+      transaction: {
+        _label: 'Transaksi',
+        transferWarehouse: 'Transfer Gudang',
+        stockEntry: 'Penyesuaian Stok',
+      },
+
+      tools: {
+        _label: 'Tools',
+        stockOpname: 'Stock Opname',
+        rebuildStock: 'Rebuild Stock',
+      },
+
+      report: {
+        _label: 'Laporan',
+        stockBalance: 'Saldo Stok',
+        stockCard: 'Kartu Stok',
+      },
     },
-    login: {
-        email: 'Email',
-        password: 'Password',
-        login: 'Masuk',
-        register: 'Daftar',
-        forgotPassword: 'Lupa Password',
+
+    accounting: {
+      _label: 'Akuntansi',
+
+      master: {
+        _label: 'Master',
+        codeOfAccount: 'Kode Akun',
+      },
+
+      transaction: {
+        _label: 'Transaksi',
+        journal: 'Jurnal',
+      },
+
+      report: {
+        _label: 'Laporan',
+        balanceSheet: 'Neraca',
+        profitLoss: 'Laba Rugi',
+      },
     },
-    register: {
-        email: 'Email',
-        password: 'Password',
-        confirmPassword: 'Konfirmasi Password',
-        register: 'Daftar',
-        login: 'Masuk',
+
+    auth: {
+      _label: 'Auth',
+      master: {
+        _label: 'Master',
+        user: 'Pengguna',
+      },
     },
-    forgotPassword: {
-        email: 'Email',
-        forgotPassword: 'Lupa Password',
-        login: 'Masuk',
-    },
+  },
+
+  login: {
+    signIn: 'Masuk',
+    email: 'Email',
+    password: 'Kata Sandi',
+    login: 'Masuk',
+    register: 'Daftar',
+    forgotPassword: 'Lupa Kata Sandi',
+    invalidEmailOrPassword: 'Email atau Kata Sandi salah',
+    orLoginUsing: 'Atau Masuk dengan',
+    title: 'Trading Management System',
+  },
 }

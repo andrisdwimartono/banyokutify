@@ -30,7 +30,6 @@
             <v-menu activator="parent" offset="16">
                 <v-list>
                     <v-list-item>
-                        <!-- cursor: pointer -->
                         <v-list-item-title @click="router.push('/profile')" style="cursor: pointer">
                             <v-icon icon="mdi-account"></v-icon>
                             Profile
@@ -43,7 +42,7 @@
                         </v-list-item-title>
                     </v-list-item>
                     <v-list-item>
-                        <v-list-item-title>
+                        <v-list-item-title @click="logout()">
                             <v-icon icon="mdi-logout"></v-icon>
                             Logout
                         </v-list-item-title>
@@ -65,4 +64,19 @@
     const rail = defineModel<boolean>('rail');
     const theme = defineModel<string>('theme');
     const locale = defineModel<string>('locale');
+
+    const logout = () => {
+        try {
+            auth.logout()
+            router.push('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 </script>
+
+<style scoped>
+    .v-list-item-title {
+        cursor: pointer;
+    }
+</style>

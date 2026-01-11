@@ -2,6 +2,7 @@ import axios from 'axios'
 import { token } from '@/utils/token'
 import { useAuthStore } from '@/stores/auth.store'
 import { pinia } from '@/plugins/pinia'
+import router from '@/router'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -74,6 +75,9 @@ api.interceptors.response.use(
         return api(originalRequest)
       } catch (err) {
         processQueue(err, null)
+        // redirect to login
+        auth.logout()
+        router.push('/login')
         return Promise.reject(err)
       } finally {
         isRefreshing = false
