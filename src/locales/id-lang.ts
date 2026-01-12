@@ -72,4 +72,18 @@ export default {
     orLoginUsing: 'Atau Masuk dengan',
     title: 'Trading Management System',
   },
+
+  dataFooter: {
+    itemsPerPageText: 'Element per halaman:',
+    pageText: '{0}-{1} dari {2}',
+    },
+    pagination: {
+    ariaLabel: {
+        root: 'Pengaturan halaman',
+        next: 'Halaman berikutnya',
+        previous: 'Halaman sebelumnya',
+        first: 'Halaman pertama',
+        last: 'Halaman terakhir',
+    },
+  },
 }

@@ -1,10 +1,10 @@
 import api from './axios'
 import type { User } from '@/types/user'
-import type { ApiListResponse } from '@/types/api'
+import type { ApiListResponse } from '@/types/apiListResponse'
 
 export const userApi = {
-  getAll() {
-    return api.get<ApiListResponse<User>>('/users')
+  getAll(params: { page: number; size: number; search?: string }) {
+    return api.get<ApiListResponse<User>>('/users', { params })
   },
   getUser(id: string) {
     return api.get<User>(`/users/${id}`)

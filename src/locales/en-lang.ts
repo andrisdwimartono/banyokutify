@@ -72,4 +72,18 @@ export default {
     orLoginUsing: 'Or login using',
     title: 'Trading Management System',
   },
+
+  dataFooter: {
+        itemsPerPageText: 'Items per page',
+        pageText: '{0}-{1} of {2}',
+    },
+    pagination: {
+        ariaLabel: {
+        root: 'Pagination',
+        next: 'Next',
+        previous: 'Previous',
+        first: 'First',
+        last: 'Last',
+        },
+    },
 }

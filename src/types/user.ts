@@ -4,6 +4,7 @@ export interface User {
   roles: string[]
   fullName: string
   profilePicture: string
+  profilePictureUrl: string
   merchantId: string
   merchantName: string
 }
