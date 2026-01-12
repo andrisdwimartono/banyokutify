@@ -16,10 +16,10 @@ export function authGuard(to: any, from: any, next: any) {
 
   // // ✅ Role check
   const roles = to.meta.roles as string[] | undefined
-  if (roles?.length > 0 && !auth.hasRole(roles)) {
+  if (roles && roles.length > 0 && !auth.hasRole(roles)) {
     // ⛔ prevent redirect loop
-    if (to.path !== '/403') {
-      return next({ path: '/403' })
+    if (to.path !== '/forbidden') {
+      return next({ path: '/forbidden' })
     }
     return next()
   }
