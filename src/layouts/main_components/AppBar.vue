@@ -2,14 +2,14 @@
   <v-app-bar :elevation="2" rounded>
     <template v-slot:prepend>
         <v-app-bar-nav-icon @click="rail = !rail" v-if="!mobile">
-            <v-icon :icon="!rail ? 'mdi-menu-open' : 'mdi-menu-close'"></v-icon>
+            <v-icon :icon="!rail ? 'mdi-chevron-left' : 'mdi-chevron-right'"></v-icon>
         </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click="drawer = !drawer" v-else="mobile">
             <v-icon :icon="!drawer ? 'mdi-menu' : 'mdi-close'"></v-icon>
         </v-app-bar-nav-icon>
     </template>
 
-    <v-app-bar-title>Application Bar</v-app-bar-title>
+    <!-- <v-app-bar-title>Application Bar</v-app-bar-title> -->
 
     <template v-slot:append>
         <v-btn @click="locale = (locale === 'en' ? 'id' : 'en')">

@@ -1,43 +1,109 @@
 <template>
+    <v-card-title class="d-flex align-center pe-2">
+      <!-- <v-icon icon="mdi-format-list-bulleted"></v-icon> &nbsp;
+      {{ t('sidebar.auth.master.user.list') }} -->
+       <!-- button add -->
+       <v-btn
+        color="primary"
+        prepend-icon="mdi-plus"
+        @click="$router.push('/auth/master/user/create')"
+      >
+        {{ t('add') }} {{ t('sidebar.auth.master.user._label') }}
+      </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-text-field
+        v-model="search"
+        density="compact"
+        :label="t('search')"
+        prepend-inner-icon="mdi-magnify"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line
+      ></v-text-field>
+    </v-card-title>
+    <!-- border table -->
     <v-data-table-server
+        :search="search"
         :headers="headers"
         :items="users?.content"
         :items-length="users?.totalElements ?? 0"
         :loading="loading"
         item-value="id"
+        @update:search="loadItems"
         @update:options="loadItems"
-    />
+        class="elevation-1"
+        flat
+    >
+    <!-- 🔢 COLUMN: NO -->
+    <template #item.no="{ index }">
+      {{ index + 1 + pageOffset }}
+    </template>
+
+    <!-- 🖼 COLUMN: PROFILE PICTURE -->
+    <template #item.profilePicture="{ value, item }">
+      <v-avatar v-if="value" size="40">
+        <v-img :src="value" :alt="item.fullName" />
+      </v-avatar>
+      <span v-else>-</span>
+    </template>
+    </v-data-table-server>
 </template>
 
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue'
-    import { userApi } from '@/services/api/user.api'
-    import type { User } from '@/types/user'
-    import type { ApiContentResponse } from '@/types/apiContentResponse'
+    import { ref, onMounted, computed } from 'vue'
+    import { userApi } from '@/services/api/auth/master/user/user.api'
+    import type { User } from '@/types/auth/master/user/user.entity'
+    import type { ApiContentResponse } from '@/types/api/apiContentResponse'
+    import { useI18n } from 'vue-i18n'
+    import { mapVuetifyToPageable } from '@/helpers/datatable.helper'
+    const { t } = useI18n()
 
     const users = ref<ApiContentResponse<User>>()
-    const loading = ref(false)
     const pagination = ref({
         page: 1,
         itemsPerPage: 10,
     })
 
-    const headers = [
-        { title: 'ID', key: 'id' },
-        { title: 'Email', key: 'email' },
-        { title: 'Roles', key: 'roles' },
-        { title: 'Full Name', key: 'fullName' },
-        { title: 'Profile Picture', key: 'profilePicture' },
-        { title: 'Merchant ID', key: 'merchantId' },
-        { title: 'Merchant Name', key: 'merchantName' },
-    ]
+    const pageOffset = computed(() => {
+        return (pagination.value.page - 1) * pagination.value.itemsPerPage
+    })
+
+    const loading = ref(false)
     const search = ref('')
+
+    // hide column id, merchantId
+    const headers = computed(() => [
+        // { title: t('id'), key: 'id' },
+        {
+            title: t('no'),
+            key: 'no',
+            sortable: false,
+        },
+        { title: t('sidebar.auth.master.user.email'), key: 'email' },
+        { title: t('sidebar.auth.master.user.roles'), key: 'roles', sortable: false },
+        { title: t('sidebar.auth.master.user.fullName'), key: 'fullName' },
+        // show as image if not null
+        { title: t('sidebar.auth.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
+            cellRenderer: (params: { value: string, row: { data: { fullName: string } } }) => {
+                if (params.value) {
+                    return `<img src="${params.value}" alt="${params.row.data.fullName}" style="width: 40px; height: 40px; border-radius: 50%;">`
+                }
+                return ''
+            }
+        },
+        { title: t('sidebar.auth.master.user.merchantName'), key: 'merchantName' },
+    ])
 
     onMounted(() => {
         loadItems({
-            page: 1,
-            itemsPerPage: 10,
-            search: '',
+            page: pagination.value.page,
+            itemsPerPage: pagination.value.itemsPerPage,
+            search: search.value,
+            sortBy: 'email',
+            sortDir: 'asc',
         })
     })
 
@@ -47,16 +113,13 @@
         pagination.value.page = options.page
         pagination.value.itemsPerPage = options.itemsPerPage
 
-        const res = await userApi.getAll({
-            page: options.page - 1,      // backend pakai 0-based
-            size: options.itemsPerPage,
-            search: options.search,
-        })
+        const pageable = mapVuetifyToPageable(options, 'email')
+
+        const res = await userApi.getAll(pageable)
 
         users.value = res.data.data
         loading.value = false
     }
-
 </script>
 
 <style scoped></style>

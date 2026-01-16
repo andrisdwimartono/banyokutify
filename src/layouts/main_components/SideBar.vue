@@ -2,8 +2,9 @@
     <v-navigation-drawer v-model="drawer" :rail="(rail && !mobile)" :temporary="mobile" :permanent="!mobile">
         <v-list>
             <v-list-item
-            prepend-icon="mdi-account-group-outline"
-            title="BANYOKU"
+              title="BANYOKU"
+              prepend-avatar="@/assets/logo.png"
+              style="font-weight: 900; font-size: 1.5rem;"
             >
             </v-list-item>
         </v-list>

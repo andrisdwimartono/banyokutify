@@ -17,9 +17,17 @@
     <v-main>
       <v-container
         fluid
-        class="fill-height d-flex align-start justify-start"
+        class="d-flex flex-column align-start"
       >
-        <router-view />
+        <PageInformation />
+        <v-card
+          class="w-100"
+          rounded="lg"
+          :style="{ padding: '1rem', backgroundColor: 'var(--v-theme-surface)' }"
+          :elevation="2"
+        >
+          <router-view />
+        </v-card>
       </v-container>
     </v-main>
   </v-app>
@@ -32,6 +40,7 @@ import { useI18n } from 'vue-i18n'
 
 import AppBar from './main_components/AppBar.vue'
 import SideBar from './main_components/SideBar.vue'
+import PageInformation from './main_components/PageInformation.vue'
 
 const drawer = ref(true)
 const rail = ref(true)

@@ -3,7 +3,7 @@ import Home from '@/modules/Home.vue'
 export default [
   {
     path: '/',
-    titleKey: 'sidebar.home',
+    name: 'home',
     icon: 'mdi-warehouse',
     component: Home,
     meta: {
@@ -11,7 +11,8 @@ export default [
       // stay empty to allow all roles
       roles: [],
       layout: 'main',
-      isSidebar: true
+      isSidebar: true,
+      title: 'sidebar.home',
     }
   },
 ]
