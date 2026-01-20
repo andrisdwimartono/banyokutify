@@ -52,8 +52,8 @@ export default {
       },
     },
 
-    auth: {
-      _label: 'Auth',
+    administration: {
+      _label: 'Administrasi',
       master: {
         _label: 'Master',
         user: {
@@ -109,6 +109,12 @@ export default {
   dataIterator: {
     loadingText: 'Memuat...',
   },
+  input: {
+    clear: 'Hapus',
+  },
+  validation: {
+    required: 'Harus diisi',
+  },
   noDataText: 'Tidak ada data',
   save: 'Simpan',
   open: 'Buka',
@@ -116,4 +122,5 @@ export default {
   search: 'Cari',
   no: 'No',
   id: 'ID',
+  merchant: 'Mitra',
 }

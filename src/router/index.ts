@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { authGuard } from './guards'
 import generalRoutes from '@/modules/routes'
-import authRoutes from '@/modules/auth/routes'
+import authRoutes from '@/modules/administration/routes'
 import salesRoutes from '@/modules/sales/routes'
 import stockRoutes from '@/modules/stock/routes'
 import accountingRoutes from '@/modules/accounting/routes'

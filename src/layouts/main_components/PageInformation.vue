@@ -60,10 +60,10 @@
         })
         return items
         // const key = route.meta.title as string
-        // // key like this "sidebar.auth.master.user._label"
-        // // the breadcrumb will be like this "sidebar.auth" / "sidebar.auth.master" / "sidebar.auth.master.user._label"
+        // // key like this "sidebar.administration.master.user._label"
+        // // the breadcrumb will be like this "sidebar.administration" / "sidebar.administration.master" / "sidebar.administration.master.user._label"
         // // sidebar not include in breadcrumb
-        // // the key should "sidebar.auth" / "sidebar.auth.master" / "sidebar.auth.master.user._label"
+        // // the key should "sidebar.administration" / "sidebar.administration.master" / "sidebar.administration.master.user._label"
         // const breadcrumbs = key?.split('.')
 
         // const items = breadcrumbs?.map((item, index) => {

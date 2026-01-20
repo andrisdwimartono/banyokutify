@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
     import { onMounted, ref } from 'vue'
-    import { profileApi } from '@/services/api/auth/profile.api'
+    import { profileApi } from '@/services/api/administration/profile.api'
 
     const defaultAvatar =
       'https://cdn.vuetifyjs.com/images/profiles/marcus.jpg'

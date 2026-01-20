@@ -1,8 +1,8 @@
 import api from '../../../axios'
-import type { User } from '@/types/auth/master/user/user.entity'
+import type { User } from '@/types/administration/master/user/user.entity'
 import type { ApiListResponse } from '@/types/api/apiListResponse'
-import type { UserRequest } from '@/types/auth/master/user/user.request'
-import type { UserUpdatePassword } from '@/types/auth/master/user/user.update.password'
+import type { UserRequest } from '@/types/administration/master/user/user.request'
+import type { UserUpdatePassword } from '@/types/administration/master/user/user.update.password'
 
 export const userApi = {
   getAll(params: any) {

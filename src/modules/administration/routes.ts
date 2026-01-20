@@ -1,6 +1,6 @@
-import UserList from '@/modules/auth/pages/master/UserList.vue'
-import UserForm from '@/modules/auth/pages/master/UserForm.vue'
-import Login from '@/modules/auth/pages/Login.vue'
+import UserList from '@/modules/administration/pages/master/user/UserList.vue'
+import UserForm from '@/modules/administration/pages/master/user/UserForm.vue'
+import Login from '@/modules/administration/pages/Login.vue'
 
 export default [
     {
@@ -20,7 +20,7 @@ export default [
       path: '/forbidden',
       name: 'forbidden',
       icon: 'mdi-lock',
-      component: () => import('@/modules/auth/pages/Forbidden.vue'),
+      component: () => import('@/modules/administration/pages/Forbidden.vue'),
       meta: {
         layout: 'auth',
         requiresAuth: false,
@@ -33,7 +33,7 @@ export default [
       path: '/profile',
       name: 'profile',
       icon: 'mdi-account',
-      component: () => import('@/modules/auth/pages/Profile.vue'),
+      component: () => import('@/modules/administration/pages/Profile.vue'),
       meta: {
         layout: 'main',
         requiresAuth: true,
@@ -43,14 +43,14 @@ export default [
       }
     },
     {
-    path: '/auth',
+    path: '/administration',
     icon: 'mdi-account-multiple-outline',
     meta: {
       requiresAuth: true,
       roles: ['ADMIN'],
       layout: 'main',
       isSidebar: true,
-      title: 'sidebar.auth._label',
+      title: 'sidebar.administration._label',
     },
     children: [
       {
@@ -61,7 +61,7 @@ export default [
           roles: ['ADMIN'],
           layout: 'main',
           isSidebar: true,
-          title: 'sidebar.auth.master._label',
+          title: 'sidebar.administration.master._label',
         },
         children: [
           {
@@ -74,7 +74,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: true,
-              title: 'sidebar.auth.master.user._label',
+              title: 'sidebar.administration.master.user._label',
             },
           },
           {
@@ -87,7 +87,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: false,
-              title: 'sidebar.auth.master.user',
+              title: 'sidebar.administration.master.user',
             },
           },
           {
@@ -100,7 +100,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: false,
-              title: 'sidebar.auth.master.user.create',
+              title: 'sidebar.administration.master.user.create',
             },
           }
         ]

@@ -1,14 +1,14 @@
 <template>
     <v-card-title class="d-flex align-center pe-2">
       <!-- <v-icon icon="mdi-format-list-bulleted"></v-icon> &nbsp;
-      {{ t('sidebar.auth.master.user.list') }} -->
+      {{ t('sidebar.administration.master.user.list') }} -->
        <!-- button add -->
        <v-btn
         color="primary"
         prepend-icon="mdi-plus"
-        @click="$router.push('/auth/master/user/create')"
+        @click="$router.push('/administration/master/user/create')"
       >
-        {{ t('add') }} {{ t('sidebar.auth.master.user._label') }}
+        {{ t('sidebar.administration.master.user.add') }}
       </v-btn>
 
       <v-spacer></v-spacer>
@@ -54,8 +54,8 @@
 
 <script setup lang="ts">
     import { ref, onMounted, computed } from 'vue'
-    import { userApi } from '@/services/api/auth/master/user/user.api'
-    import type { User } from '@/types/auth/master/user/user.entity'
+    import { userApi } from '@/services/api/administration/master/user/user.api'
+    import type { User } from '@/types/administration/master/user/user.entity'
     import type { ApiContentResponse } from '@/types/api/apiContentResponse'
     import { useI18n } from 'vue-i18n'
     import { mapVuetifyToPageable } from '@/helpers/datatable.helper'
@@ -82,11 +82,11 @@
             key: 'no',
             sortable: false,
         },
-        { title: t('sidebar.auth.master.user.email'), key: 'email' },
-        { title: t('sidebar.auth.master.user.roles'), key: 'roles', sortable: false },
-        { title: t('sidebar.auth.master.user.fullName'), key: 'fullName' },
+        { title: t('sidebar.administration.master.user.email'), key: 'email' },
+        { title: t('sidebar.administration.master.user.roles'), key: 'roles', sortable: false },
+        { title: t('sidebar.administration.master.user.fullName'), key: 'fullName' },
         // show as image if not null
-        { title: t('sidebar.auth.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
+        { title: t('sidebar.administration.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
             cellRenderer: (params: { value: string, row: { data: { fullName: string } } }) => {
                 if (params.value) {
                     return `<img src="${params.value}" alt="${params.row.data.fullName}" style="width: 40px; height: 40px; border-radius: 50%;">`
@@ -94,7 +94,7 @@
                 return ''
             }
         },
-        { title: t('sidebar.auth.master.user.merchantName'), key: 'merchantName' },
+        { title: t('sidebar.administration.master.user.merchantName'), key: 'merchantName' },
     ])
 
     onMounted(() => {

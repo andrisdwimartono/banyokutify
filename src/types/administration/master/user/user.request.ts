@@ -4,8 +4,8 @@ export interface UserRequest {
   fullName: string
   profilePicture: string
   profilePictureUrl: string
-  merchantId: string
-  merchantName: string
+  merchantId?: string
+  merchantName?: string
   password?: string
   passwordConfirmation?: string
 }

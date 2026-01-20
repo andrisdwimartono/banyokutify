@@ -52,8 +52,8 @@ export default {
       },
     },
 
-    auth: {
-      _label: 'Auth',
+    administration: {
+      _label: 'Administration',
       master: {
         _label: 'Master',
         user: {
@@ -109,6 +109,12 @@ export default {
   dataIterator: {
     loadingText: 'Loading...',
   },
+  input: {
+    clear: 'Clear',
+  },
+  validation: {
+    required: 'Required',
+  },
   noDataText: 'No data',
   save: 'Save',
   open: 'Open',
@@ -116,4 +122,5 @@ export default {
   search: 'Search',
   no: 'No',
   id: 'ID',
+  merchant: 'Merchant',
 }
