@@ -8,3 +8,13 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+.v-field {
+  transition: all 0.2s ease;
+}
+
+.v-field:hover {
+  transform: translateY(-1px);
+}
+.v-field--active {
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}

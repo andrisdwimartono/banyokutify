@@ -1,7 +1,7 @@
 <template>
     <v-card
         class="w-100"
-        :style="{ padding: '0rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }"
+        :style="{ padding: '0rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }"
         :elevation="0"
     >
         <div style="font-size: 1.5rem; font-weight: 500; margin-left: 1rem">
@@ -60,10 +60,10 @@
         })
         return items
         // const key = route.meta.title as string
-        // // key like this "sidebar.administration.master.user._label"
-        // // the breadcrumb will be like this "sidebar.administration" / "sidebar.administration.master" / "sidebar.administration.master.user._label"
-        // // sidebar not include in breadcrumb
-        // // the key should "sidebar.administration" / "sidebar.administration.master" / "sidebar.administration.master.user._label"
+        // // key like this "banyoku.administration.master.user._label"
+        // // the breadcrumb will be like this "banyoku.administration" / "banyoku.administration.master" / "banyoku.administration.master.user._label"
+        // // banyoku not include in breadcrumb
+        // // the key should "banyoku.administration" / "banyoku.administration.master" / "banyoku.administration.master.user._label"
         // const breadcrumbs = key?.split('.')
 
         // const items = breadcrumbs?.map((item, index) => {
@@ -73,6 +73,6 @@
         //         href: item,
         //     }
         // })
-        // return items?.filter((item) => item.href !== 'sidebar')
+        // return items?.filter((item) => item.href !== 'banyoku')
     })
 </script>

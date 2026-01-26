@@ -39,7 +39,7 @@ export default [
         requiresAuth: true,
         roles: [],
         isSidebar: false,
-        title: 'sidebar.profile',
+        title: 'banyoku.profile',
       }
     },
     {
@@ -50,7 +50,7 @@ export default [
       roles: ['ADMIN'],
       layout: 'main',
       isSidebar: true,
-      title: 'sidebar.administration._label',
+      title: 'banyoku.administration._label',
     },
     children: [
       {
@@ -61,7 +61,7 @@ export default [
           roles: ['ADMIN'],
           layout: 'main',
           isSidebar: true,
-          title: 'sidebar.administration.master._label',
+          title: 'banyoku.administration.master._label',
         },
         children: [
           {
@@ -74,7 +74,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: true,
-              title: 'sidebar.administration.master.user._label',
+              title: 'banyoku.administration.master.user._label',
             },
           },
           {
@@ -87,7 +87,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: false,
-              title: 'sidebar.administration.master.user',
+              title: 'banyoku.administration.master.user.edit',
             },
           },
           {
@@ -100,7 +100,7 @@ export default [
               roles: ['ADMIN'],
               layout: 'main',
               isSidebar: false,
-              title: 'sidebar.administration.master.user.create',
+              title: 'banyoku.administration.master.user.create',
             },
           }
         ]

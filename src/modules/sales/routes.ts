@@ -8,7 +8,7 @@ export default [
       requiresAuth: true,
       roles: ['ADMIN', 'SALES', 'MANAGER'],
       layout: 'main',
-      title: 'sidebar.sales._label',
+      title: 'banyoku.sales._label',
     },
     children: [
       {
@@ -20,7 +20,7 @@ export default [
           requiresAuth: true,
           roles: ['ADMIN', 'SALES', 'MANAGER'],
           layout: 'main',
-          title: 'sidebar.sales.list',
+          title: 'banyoku.sales.list',
         }
       }
     ]

@@ -8,7 +8,7 @@ export default [
       requiresAuth: true,
       roles: ['ADMIN'],
       layout: 'main',
-      title: 'sidebar.accounting',
+      title: 'banyoku.accounting',
     },
     children: [
       {
@@ -20,7 +20,7 @@ export default [
           requiresAuth: true,
           roles: ['ADMIN'],
           layout: 'main',
-          title: 'sidebar.codeOfAccount',
+          title: 'banyoku.codeOfAccount',
         }
       }
     ]

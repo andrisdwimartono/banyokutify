@@ -1,5 +1,5 @@
 export default {
-  sidebar: {
+  banyoku: {
     home: 'Beranda',
     dashboard: 'Dashboard',
 
@@ -71,6 +71,21 @@ export default {
           profilePicture: 'Foto Profil',
           merchantId: 'ID Merchant',
           merchantName: 'Nama Merchant',
+          success: {
+            _label: 'Success',
+            getList: 'Daftar pengguna berhasil diambil',
+            getDetail: 'Detail pengguna berhasil diambil',
+            userCreated: 'Pengguna berhasil dibuat',
+            userUpdated: 'Pengguna berhasil diubah',
+            userDeleted: 'Pengguna berhasil dihapus',
+          },
+          error: {
+            _label: 'Error',
+            getList: 'Gagal mengambil daftar pengguna',
+            getDetail: 'Gagal mengambil detail pengguna',
+            emailExists: 'Email sudah terdaftar',
+            passwordConfirmation: 'Kata sandi tidak sesuai', 
+          }
         },
       },
     },
@@ -117,10 +132,13 @@ export default {
   },
   noDataText: 'Tidak ada data',
   save: 'Simpan',
+  saving: 'Simpan...',
+  loading: 'Memuat...',
   open: 'Buka',
   close: 'Tutup',
   search: 'Cari',
   no: 'No',
   id: 'ID',
   merchant: 'Mitra',
+  action: 'Aksi',
 }

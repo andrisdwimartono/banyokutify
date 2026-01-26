@@ -1,5 +1,5 @@
 export default {
-  sidebar: {
+  banyoku: {
     home: 'Home',
     dashboard: 'Dashboard',
 
@@ -71,6 +71,24 @@ export default {
           profilePicture: 'Profile Picture',
           merchantId: 'Merchant ID',
           merchantName: 'Merchant Name',
+          success: {
+            _label: 'Success',
+            getList: 'User list successfully retrieved',
+            getDetail: 'User detail successfully retrieved',
+            create: 'User successfully created',
+            update: 'User successfully updated',
+            delete: 'User successfully deleted',
+          },
+          error: {
+            _label: 'Error',
+            getList: 'Failed to retrieve user list',
+            getDetail: 'Failed to retrieve user detail',
+            create: 'Failed to create user',
+            update: 'Failed to update user',
+            delete: 'Failed to delete user',
+            emailExists: 'Email already exists',
+            passwordConfirmation: 'Password confirmation does not match', 
+          }
         },
       },
     },
@@ -117,10 +135,13 @@ export default {
   },
   noDataText: 'No data',
   save: 'Save',
+  saving: 'Saving...',
+  loading: 'Loading...',
   open: 'Open',
   close: 'Close',
   search: 'Search',
   no: 'No',
   id: 'ID',
   merchant: 'Merchant',
+  action: 'Action',
 }

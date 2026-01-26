@@ -10,7 +10,7 @@ export default [
       roles: ['ADMIN', 'ABC'],
       layout: 'main',
       isSidebar: true,
-      title: 'sidebar.stock._label',
+      title: 'banyoku.stock._label',
     },
     children: [
       {
@@ -21,12 +21,12 @@ export default [
           roles: ['ADMIN', 'ABC'],
           layout: 'main',
           isSidebar: true,
-          title: 'sidebar.stock.master._label',
+          title: 'banyoku.stock.master._label',
         },
         children: [
           {
             path: 'product',
-            name: 'sidebar.stock.master.product',
+            name: 'banyoku.stock.master.product',
             icon: 'mdi-package-variant',
             component: ProductsList,
             meta: {
@@ -34,12 +34,12 @@ export default [
               roles: ['ADMIN', 'ABC'],
               layout: 'main',
               isSidebar: true,
-              title: 'sidebar.stock.master.product',
+              title: 'banyoku.stock.master.product',
             }
           },
           {
             path: 'warehouse',
-            name: 'sidebar.stock.master.warehouse',
+            name: 'banyoku.stock.master.warehouse',
             icon: 'mdi-home-group',
             component: WarehousesList,
             meta: {
@@ -47,7 +47,7 @@ export default [
               roles: ['ADMIN', 'ABC'],
               layout: 'main',
               isSidebar: true,
-              title: 'sidebar.stock.master.warehouse',
+              title: 'banyoku.stock.master.warehouse',
             }
           }
         ]

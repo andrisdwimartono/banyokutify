@@ -1,14 +1,14 @@
 <template>
     <v-card-title class="d-flex align-center pe-2">
       <!-- <v-icon icon="mdi-format-list-bulleted"></v-icon> &nbsp;
-      {{ t('sidebar.administration.master.user.list') }} -->
+      {{ t('banyoku.administration.master.user.list') }} -->
        <!-- button add -->
        <v-btn
         color="primary"
         prepend-icon="mdi-plus"
         @click="$router.push('/administration/master/user/create')"
       >
-        {{ t('sidebar.administration.master.user.add') }}
+        {{ t('banyoku.administration.master.user.add') }}
       </v-btn>
 
       <v-spacer></v-spacer>
@@ -28,8 +28,8 @@
     <v-data-table-server
         :search="search"
         :headers="headers"
-        :items="users?.content"
-        :items-length="users?.totalElements ?? 0"
+        :items="usersList"
+        :items-length="totalElements"
         :loading="loading"
         item-value="id"
         @update:search="loadItems"
@@ -49,6 +49,15 @@
       </v-avatar>
       <span v-else>-</span>
     </template>
+
+    <!-- ACTION COLUMN -->
+    <template #item.action="{ item }">
+      <v-icon
+        icon="mdi-pencil-outline"
+        color="primary"
+        @click="$router.push(`/administration/master/user/${item.id}`)"
+      ></v-icon>
+    </template>
     </v-data-table-server>
 </template>
 
@@ -62,6 +71,8 @@
     const { t } = useI18n()
 
     const users = ref<ApiContentResponse<User>>()
+    const usersList = ref<User[]>([])
+    const totalElements = ref(0)
     const pagination = ref({
         page: 1,
         itemsPerPage: 10,
@@ -82,11 +93,11 @@
             key: 'no',
             sortable: false,
         },
-        { title: t('sidebar.administration.master.user.email'), key: 'email' },
-        { title: t('sidebar.administration.master.user.roles'), key: 'roles', sortable: false },
-        { title: t('sidebar.administration.master.user.fullName'), key: 'fullName' },
+        { title: t('banyoku.administration.master.user.email'), key: 'email' },
+        { title: t('banyoku.administration.master.user.roles'), key: 'roles', sortable: false },
+        { title: t('banyoku.administration.master.user.fullName'), key: 'fullName' },
         // show as image if not null
-        { title: t('sidebar.administration.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
+        { title: t('banyoku.administration.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
             cellRenderer: (params: { value: string, row: { data: { fullName: string } } }) => {
                 if (params.value) {
                     return `<img src="${params.value}" alt="${params.row.data.fullName}" style="width: 40px; height: 40px; border-radius: 50%;">`
@@ -94,7 +105,9 @@
                 return ''
             }
         },
-        { title: t('sidebar.administration.master.user.merchantName'), key: 'merchantName' },
+        { title: t('banyoku.administration.master.user.merchantName'), key: 'merchantName' },
+        // action
+        { title: t('action'), key: 'action', sortable: false},
     ])
 
     onMounted(() => {
@@ -117,7 +130,9 @@
 
         const res = await userApi.getAll(pageable)
 
-        users.value = res.data.data
+        usersList.value = res.data.data
+        totalElements.value = res.data.meta.totalElements
+
         loading.value = false
     }
 </script>

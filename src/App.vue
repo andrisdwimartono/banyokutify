@@ -3,6 +3,7 @@
     <component :is="layout">
       <router-view />
     </component>
+    <GlobalSnackbar />
   </v-app>
 </template>
 
@@ -13,6 +14,7 @@ import { useRoute } from 'vue-router'
 import MainLayout from '@/layouts/MainLayout.vue'
 import AuthLayout from '@/layouts/AuthLayout.vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
+import GlobalSnackbar from '@/layouts/form_components/GlobalSnackbar.vue'
 
 const route = useRoute()
 

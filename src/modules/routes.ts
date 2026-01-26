@@ -12,7 +12,7 @@ export default [
       roles: [],
       layout: 'main',
       isSidebar: true,
-      title: 'sidebar.home',
+      title: 'banyoku.home',
     }
   },
 ]

@@ -31,80 +31,82 @@
           size="20"
           color="primary"
         />
-        <span class="ms-2 text-caption">Memuat data...</span>
+        <span class="ms-2 text-caption">{{ t('loading') }}</span>
       </div>
     </template>
   </v-autocomplete>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { merchantApi } from '@/services/api/administration/master/merchant/merchant.api'
-import type { MerchantSelect } from '@/types/administration/master/merchant/merchant.select'
+    import { ref, onMounted } from 'vue'
+    import { merchantApi } from '@/services/api/administration/master/merchant/merchant.api'
+    import type { MerchantSelect } from '@/types/administration/master/merchant/merchant.select'
+    import { useI18n } from 'vue-i18n'
+    const { t } = useI18n()
 
-defineProps<{ label?: string }>()
+    defineProps<{ label?: string }>()
 
-const modelValue = defineModel<string | null>()
+    const modelValue = defineModel<string | null>()
 
-const items = ref<MerchantSelect[]>([])
-const loading = ref(false)
-const search = ref('')
-const page = ref(0)
-const size = 10
-const totalElements = ref(0)
+    const items = ref<MerchantSelect[]>([])
+    const loading = ref(false)
+    const search = ref('')
+    const page = ref(0)
+    const size = 10
+    const totalElements = ref(0)
 
-const hasNextPage = ref(true)
+    const hasNextPage = ref(true)
 
-/**
- * Load merchant dari API
- */
-const loadMerchants = async (reset = false) => {
-  if (loading.value || !hasNextPage.value) return
-  loading.value = true
+    /**
+     * Load merchant dari API
+     */
+    const loadMerchants = async (reset = false) => {
+    if (loading.value || !hasNextPage.value) return
+    loading.value = true
 
-  if (reset) {
-    page.value = 0
-    items.value = []
-    hasNextPage.value = true
-  }
+    if (reset) {
+        page.value = 0
+        items.value = []
+        hasNextPage.value = true
+    }
 
-  const res = await merchantApi.select({
-    page: page.value,
-    size,
-    search: search.value,
-  })
+    const res = await merchantApi.select({
+        page: page.value,
+        size,
+        search: search.value,
+    })
 
-  const content = res.data.data.content
-  totalElements.value = res.data.data.totalElements
+    const content = res.data.data.content
+    totalElements.value = res.data.data.totalElements
 
-  items.value.push(...content)
-  page.value++
+    items.value.push(...content)
+    page.value++
 
-  if (items.value.length >= totalElements.value) {
-    hasNextPage.value = false
-  }
+    if (items.value.length >= totalElements.value) {
+        hasNextPage.value = false
+    }
 
-  loading.value = false
-}
+    loading.value = false
+    }
 
-/**
- * Search handler
- */
-const onSearch = (val: string) => {
-  search.value = val
-  loadMerchants(true)
-}
+    /**
+     * Search handler
+     */
+    const onSearch = (val: string) => {
+    search.value = val
+    loadMerchants(true)
+    }
 
-/**
- * Trigger saat sentinel muncul (scroll mentok)
- */
-const onIntersect = (isIntersecting: boolean) => {
-  if (isIntersecting) {
-    loadMerchants()
-  }
-}
+    /**
+     * Trigger saat sentinel muncul (scroll mentok)
+     */
+    const onIntersect = (isIntersecting: boolean) => {
+    if (isIntersecting) {
+        loadMerchants()
+    }
+    }
 
-onMounted(() => {
-  loadMerchants(true)
-})
+    onMounted(() => {
+    loadMerchants(true)
+    })
 </script>

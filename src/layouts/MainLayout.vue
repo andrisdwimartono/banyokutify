@@ -23,7 +23,7 @@
         <v-card
           class="w-100"
           rounded="lg"
-          :style="{ padding: '1rem', backgroundColor: 'var(--v-theme-surface)' }"
+          :style="{ padding: '1rem'}"
           :elevation="2"
         >
           <router-view />
