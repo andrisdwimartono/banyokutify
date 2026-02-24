@@ -42,7 +42,17 @@ export default {
 
       transaction: {
         _label: 'Transaction',
-        journal: 'Journal',
+        journal: {
+          _label: 'Journal',
+          create: 'Create Journal',
+          journalNo: 'Journal No.',
+          date: 'Date',
+          reference: 'Reference',
+          description: 'Description',
+          account: 'Account',
+          debit: 'Debit',
+          credit: 'Credit',
+        }
       },
 
       report: {

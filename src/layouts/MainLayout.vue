@@ -24,7 +24,7 @@
           class="w-100"
           rounded="lg"
           :style="{ padding: '1rem'}"
-          :elevation="2"
+          :elevation="0"
         >
           <router-view />
         </v-card>

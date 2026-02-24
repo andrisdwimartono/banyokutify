@@ -110,6 +110,7 @@
     const id = ref<string | null>(null)
     
     onMounted(() => {
+        snackbar.show('Error', 'test', 'success')
         if (routeId) {
             id.value = routeId
             loadUser(routeId)

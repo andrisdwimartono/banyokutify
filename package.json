@@ -14,6 +14,10 @@
   "dependencies": {
     "@fontsource/roboto": "5.2.7",
     "@mdi/font": "7.4.47",
+    "@revolist/revogrid-column-date": "^2.0.25",
+    "@revolist/revogrid-column-numeral": "^2.0.8",
+    "@revolist/revogrid-column-select": "^3.1.9",
+    "@revolist/vue3-datagrid": "^4.20.2",
     "axios": "^1.13.2",
     "pinia": "^3.0.4",
     "vue": "^3.5.21",

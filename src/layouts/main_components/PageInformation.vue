@@ -1,8 +1,8 @@
 <template>
     <v-card
         class="w-100"
-        :style="{ padding: '0rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }"
-        :elevation="0"
+        :style="{ padding: '1rem', marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}"
+        :elevation="1"
     >
         <div style="font-size: 1.5rem; font-weight: 500; margin-left: 1rem">
             {{ title }}

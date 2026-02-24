@@ -42,7 +42,17 @@ export default {
 
       transaction: {
         _label: 'Transaksi',
-        journal: 'Jurnal',
+        journal: {
+          _label: 'Jurnal',
+          create: 'Buat Jurnal',
+          journalNo: 'No. Jurnal',
+          date: 'Tanggal',
+          reference: 'Referensi',
+          description: 'Deskripsi',
+          account: 'Akun',
+          debit: 'Debit',
+          credit: 'Kredit',
+        }
       },
 
       report: {

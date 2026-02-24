@@ -61,7 +61,6 @@ const snackbar = useSnackbarStore()
   /* NOT pure white */
   background: rgba(246, 246, 248, 0.92);
 
-
   backdrop-filter: blur(16px);
   border-radius: 14px;
   text-align: center;
@@ -73,8 +72,8 @@ const snackbar = useSnackbarStore()
 
 
   box-shadow:
-  0 12px 30px rgba(0, 0, 0, 0.15),
-  0 4px 8px rgba(0, 0, 0, 0.08);
+  0 6px 15px rgba(0, 0, 0, 0.15),
+  0 2px 4px rgba(0, 0, 0, 0.08);
 
 
   animation: ios-fade-slide 0.35s ease-out;

@@ -1,5 +1,5 @@
-import UserList from '@/modules/administration/pages/master/user/UserList.vue'
-import UserForm from '@/modules/administration/pages/master/user/UserForm.vue'
+import UserList from '@/modules/administration/master/user/UserList.vue'
+import UserForm from '@/modules/administration/master/user/UserForm.vue'
 import Login from '@/modules/administration/pages/Login.vue'
 
 export default [
