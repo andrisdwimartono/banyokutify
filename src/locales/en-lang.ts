@@ -52,6 +52,8 @@ export default {
           account: 'Account',
           debit: 'Debit',
           credit: 'Credit',
+          searchAccount: 'Search Account',
+          clickToSelect: 'Click to select',
         }
       },
 

@@ -44,6 +44,10 @@
                 ></v-text-field>
             </v-col>
         </v-row>
+
+        <SaveButton
+            @submit="submit"
+        />
     </v-form>
   
 
@@ -62,6 +66,7 @@ import { useTheme } from 'vuetify'
 import { journalApi } from '@/services/api/accounting/transaction/journal/journal.api'
 import { useSnackbarStore } from '@/stores/snackbar.store'
 import JournalDetailGrid from '@/modules/accounting/transaction/journal/JournalDetailGrid.vue'
+import SaveButton from '@/layouts/form_components/SaveButton.vue'
 import type { JournalRequest } from '@/types/accounting/transaction/journal/journal.request'
 
 const route = useRoute();
@@ -74,6 +79,8 @@ const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
 
 const valid = ref(false)
+const form = ref<InstanceType<typeof import('vuetify/components').VForm> | null>(null)
+
 const journalRequest = ref<JournalRequest>({
         journalNo: '',
         date: '',
@@ -82,37 +89,46 @@ const journalRequest = ref<JournalRequest>({
         journalDetails: [],
     })
 
-journalRequest.value.journalDetails.push({
-    accountId: '',
-    debit: 0,
-    credit: 0,
-    description: '',
-    rowNo: 1
-})
+// Seed with 2 empty rows by default
+journalRequest.value.journalDetails.push(
+    { accountId: '', debit: 0, credit: 0, description: '', rowNo: 1 },
+    { accountId: '', debit: 0, credit: 0, description: '', rowNo: 2 },
+)
 
-journalRequest.value.journalDetails.push({
-    accountId: '',
-    debit: 0,
-    credit: 0,
-    description: '',
-    rowNo: 2
-})
-
+// id if edit, null if create
 const id = ref<string | null>(null)
 
-const submit = async () => {
-        if (!journalRequest.value) return
-
-        try {
-            if (id.value) {
-                const res = await journalApi.update(id.value, journalRequest.value)
-                snackbar.show('Success', t(res.data.code), 'success')
-            } else {
-                const res = await journalApi.create(journalRequest.value)
-                snackbar.show('Success', t(res.data.code), 'success')
-            }
-        } catch (err: any) {
-            snackbar.show('Error', t(err.response.data.code), 'success')
-        }
+onMounted(async () => {
+    if (routeId) {
+        id.value = routeId
+        await loadJournal(routeId)
     }
+})
+
+const loadJournal = async (journalId: string) => {
+    try {
+        const res = await journalApi.getJournal(journalId)
+        journalRequest.value = res.data.data
+    } catch (err: any) {
+        snackbar.show('Error', t(err.response?.data?.code ?? 'error.unknown'), 'error')
+    }
+}
+
+const submit = async () => {
+    // Validate form first
+    const { valid: isValid } = await form.value!.validate()
+    if (!isValid) return
+
+    try {
+        if (id.value) {
+            const res = await journalApi.update(id.value, journalRequest.value)
+            snackbar.show('Success', t(res.data.code), 'success')
+        } else {
+            const res = await journalApi.create(journalRequest.value)
+            snackbar.show('Success', t(res.data.code), 'success')
+        }
+    } catch (err: any) {
+        snackbar.show('Error', t(err.response?.data?.code ?? 'error.unknown'), 'error')
+    }
+}
 </script>

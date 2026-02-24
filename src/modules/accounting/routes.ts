@@ -75,6 +75,19 @@ export default [
               layout: 'main',
               title: 'banyoku.accounting.transaction.journal.create',
             }
+          },
+          {
+            path: '/accounting/transaction/journal/:id/edit',
+            icon: 'mdi-account-multiple-outline',
+            name: 'journal.edit',
+            component: JournalForm,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              isSidebar: false,
+              layout: 'main',
+              title: 'banyoku.accounting.transaction.journal.edit',
+            }
           }
         ],
       },

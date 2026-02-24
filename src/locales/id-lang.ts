@@ -52,6 +52,8 @@ export default {
           account: 'Akun',
           debit: 'Debit',
           credit: 'Kredit',
+          searchAccount: 'Cari Akun',
+          clickToSelect: 'Klik untuk memilih',
         }
       },
 
