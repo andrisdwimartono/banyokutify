@@ -44,18 +44,22 @@
                 ></v-text-field>
             </v-col>
         </v-row>
-
+        <v-row>
+            <v-col cols="12">
+                <JournalDetailGrid
+                    v-model:source="journalRequest.journalDetails"
+                    v-model:isDark="isDark"
+                    style="width: 100%;"
+                />
+            </v-col>
+        </v-row>
         <SaveButton
             @submit="submit"
         />
     </v-form>
   
 
-  <JournalDetailGrid
-    v-model:source="journalRequest.journalDetails"
-    v-model:isDark="isDark"
-    style="width: 100%;"
-  />
+  
 </template>
 
 <script setup lang="ts">

@@ -11,6 +11,7 @@
       :hide-attribution="true"
       @afteredit="onAfterEdit"
     />
+    <AddRowButton class="mt-2" @add="addRow" />
 
     <!-- Custom Account Autocomplete Overlay -->
     <Teleport to="body">
@@ -65,6 +66,7 @@ import { useI18n } from 'vue-i18n'
 import type { JournalDetailRequest } from '@/types/accounting/transaction/journal/journal.request'
 import { codeOfAccountApi } from '@/services/api/accounting/master/code_of_account/codeOfAccount.api'
 import type { CodeOfAccount } from '@/types/accounting/master/code_of_account/codeOfAccount.entity'
+import AddRowButton from '@/layouts/form_components/AddRowButton.vue'
 
 const { t } = useI18n()
 
@@ -115,7 +117,40 @@ const onAfterEdit = (e: CustomEvent) => {
   const { rowIndex, prop, val } = e.detail
   if (prop === 'accountId') return // handled by autocomplete
   if (source.value && source.value[rowIndex] != null) {
-    ;(source.value[rowIndex] as any)[prop] = val
+    const row = source.value[rowIndex] as any
+    row[prop] = val
+    
+    // Auto-zero the opposite field if one is filled
+    if (prop === 'debit') {
+      const numVal = Number(val) || 0
+      if (numVal !== 0) {
+        row.credit = 0
+      }
+    } else if (prop === 'credit') {
+      const numVal = Number(val) || 0
+      if (numVal !== 0) {
+        row.debit = 0
+      }
+    }
+    
+    // Force reactivity update in revo grid by re-assigning source array
+    source.value = [...source.value]
+  }
+}
+
+// Add a new empty row to the grid
+const addRow = () => {
+  const newRow = {
+    accountId: '',
+    debit: 0,
+    credit: 0,
+    description: ''
+  } as unknown as JournalDetailRequest
+  
+  if (source.value) {
+    source.value = [...source.value, newRow]
+  } else {
+    source.value = [newRow]
   }
 }
 
@@ -236,12 +271,20 @@ const columns = computed(() => [
     name: t("banyoku.accounting.transaction.journal.debit"),
     columnType: 'numeric',
     size: 250,
+    readonly: (params: any) => {
+      const credit = Number(params?.model?.credit) || 0
+      return credit !== 0
+    }
   },
   {
     prop: 'credit',
     name: t("banyoku.accounting.transaction.journal.credit"),
     columnType: 'numeric',
     size: 250,
+    readonly: (params: any) => {
+      const debit = Number(params?.model?.debit) || 0
+      return debit !== 0
+    }
   },
   {
     prop: 'description',

@@ -156,4 +156,5 @@ export default {
   id: 'ID',
   merchant: 'Merchant',
   action: 'Action',
+  addRow: 'Add Row',
 }
