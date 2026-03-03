@@ -1,17 +1,21 @@
 <template>
   <div class="banyoku-grid-wrapper" :class="{ 'grid-dark': isDark }">
-    <RevoGrid
-      ref="gridRef"
-      :columns="columns"
-      :source="source"
-      :columnTypes="columnTypes"
-      :use-clipboard="true"
-      :theme="isDark ? 'darkCompact' : 'compact'"
-      :stretch="true"
-      :hide-attribution="true"
-      @afteredit="onAfterEdit"
-    />
-    <AddRowButton class="mt-2" @add="addRow" />
+    <div class="grid-container" :style="{ height: gridHeight + 'px' }">
+      <RevoGrid
+        ref="gridRef"
+        :columns="columns"
+        :source="source"
+        :columnTypes="columnTypes"
+        :use-clipboard="true"
+        :theme="isDark ? 'darkCompact' : 'compact'"
+        :stretch="true"
+        :hide-attribution="true"
+        @afteredit="onAfterEdit"
+      />
+    </div>
+    <div class="add-row-footer">
+      <AddRowButton @add="addRow" />
+    </div>
 
     <!-- Custom Account Autocomplete Overlay -->
     <Teleport to="body">
@@ -82,6 +86,16 @@ const coaMap = ref<Map<string, CodeOfAccount>>(new Map())
 const columnTypes = {
   numeric: new NumberColumnType('0,0'),
 }
+
+// Dynamic grid height: header (~38px) + each row (~36px in compact theme) + 2px border
+const ROW_HEIGHT = 36
+const HEADER_HEIGHT = 38
+const BORDER_EXTRA = 2
+
+const gridHeight = computed(() => {
+  const rowCount = source.value?.length ?? 0
+  return HEADER_HEIGHT + (rowCount * ROW_HEIGHT) + BORDER_EXTRA
+})
 
 // Autocomplete state
 const autocomplete = reactive({
@@ -234,6 +248,13 @@ const closeAutocomplete = () => {
   autocomplete.items = []
 }
 
+// Remove a row by index
+const removeRow = (rowIndex: number) => {
+  if (source.value && source.value.length > 0) {
+    source.value = source.value.filter((_, idx) => idx !== rowIndex)
+  }
+}
+
 // Columns definition
 const columns = computed(() => [
   {
@@ -290,6 +311,34 @@ const columns = computed(() => [
     prop: 'description',
     name: t("banyoku.accounting.transaction.journal.description"),
     size: 400,
+  },
+  {
+    name: '',
+    prop: 'action',
+    size: 50,
+    readonly: true,
+    cellTemplate: (h: any, { rowIndex }: any) => {
+      return h('button', {
+        style: {
+          background: 'transparent',
+          border: 'none',
+          color: '#ff3b30',
+          cursor: 'pointer',
+          fontSize: '16px',
+          padding: '4px 8px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+        },
+        title: 'Hapus baris',
+        onclick: (e: MouseEvent) => {
+          e.stopPropagation()
+          removeRow(rowIndex)
+        },
+      }, '×')
+    },
   }
 ])
 </script>
@@ -297,10 +346,40 @@ const columns = computed(() => [
 <style scoped>
 /* ── iOS-inspired grid styling ── */
 .banyoku-grid-wrapper {
+  display: flex;
+  flex-direction: column;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(142, 142, 147, 0.25);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  width: fit-content;
+}
+
+.grid-container {
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+/* Remove internal RevoGrid vertical scrollbar */
+.grid-container :deep(revo-grid) {
+  height: 100% !important;
+}
+
+.grid-container :deep(.main-viewport) {
+  overflow-y: hidden !important;
+}
+
+.grid-container :deep(revogr-viewport-scroll) {
+  overflow-y: hidden !important;
+}
+
+.add-row-footer {
+  padding: 8px 12px;
+  border-top: 1px solid rgba(142, 142, 147, 0.08);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 /* Attribution hide */

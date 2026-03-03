@@ -49,7 +49,7 @@
                 <JournalDetailGrid
                     v-model:source="journalRequest.journalDetails"
                     v-model:isDark="isDark"
-                    style="width: 100%;"
+                    style="width: auto;"
                 />
             </v-col>
         </v-row>
