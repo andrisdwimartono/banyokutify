@@ -102,6 +102,32 @@ export default {
             passwordConfirmation: 'Password confirmation does not match', 
           }
         },
+        role: {
+          _label: 'Role',
+          list: 'Role List',
+          add: 'Add Role',
+          edit: 'Edit Role',
+          delete: 'Delete Role',
+          create: 'Create Role',
+          roleName: 'Role Name',
+          status: 'Status',
+          active: 'Active',
+          inactive: 'Inactive',
+          success: {
+            _label: 'Success',
+            getList: 'Role list successfully retrieved',
+            getDetail: 'Role detail successfully retrieved',
+            create: 'Role successfully created',
+            update: 'Role successfully updated',
+            delete: 'Role successfully deleted',
+          },
+          error: {
+            _label: 'Error',
+            getList: 'Failed to retrieve role list',
+            getDetail: 'Failed to retrieve role detail',
+            roleNameExists: 'Role name already exists',
+          }
+        },
       },
     },
   },

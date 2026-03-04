@@ -1,5 +1,7 @@
 import UserList from '@/modules/administration/master/user/UserList.vue'
 import UserForm from '@/modules/administration/master/user/UserForm.vue'
+import RoleList from '@/modules/administration/master/role/RoleList.vue'
+import RoleForm from '@/modules/administration/master/role/RoleForm.vue'
 import Login from '@/modules/administration/pages/Login.vue'
 
 export default [
@@ -101,6 +103,45 @@ export default [
               layout: 'main',
               isSidebar: false,
               title: 'banyoku.administration.master.user.create',
+            },
+          },
+          {
+            path: 'role',
+            name: 'role.list',
+            icon: 'mdi-shield-account-outline',
+            component: RoleList,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: true,
+              title: 'banyoku.administration.master.role._label',
+            },
+          },
+          {
+            path: 'role/:id',
+            name: 'role.edit',
+            icon: 'mdi-shield-account-outline',
+            component: RoleForm,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: false,
+              title: 'banyoku.administration.master.role.edit',
+            },
+          },
+          {
+            path: 'role/create',
+            name: 'role.create',
+            icon: 'mdi-shield-account-outline',
+            component: RoleForm,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: false,
+              title: 'banyoku.administration.master.role.create',
             },
           }
         ]

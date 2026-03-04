@@ -99,6 +99,32 @@ export default {
             passwordConfirmation: 'Kata sandi tidak sesuai', 
           }
         },
+        role: {
+          _label: 'Role',
+          list: 'Daftar Role',
+          add: 'Tambah Role',
+          edit: 'Ubah Role',
+          delete: 'Hapus Role',
+          create: 'Buat Role',
+          roleName: 'Nama Role',
+          status: 'Status',
+          active: 'Aktif',
+          inactive: 'Tidak Aktif',
+          success: {
+            _label: 'Success',
+            getList: 'Daftar role berhasil diambil',
+            getDetail: 'Detail role berhasil diambil',
+            roleCreated: 'Role berhasil dibuat',
+            roleUpdated: 'Role berhasil diubah',
+            roleDeleted: 'Role berhasil dihapus',
+          },
+          error: {
+            _label: 'Error',
+            getList: 'Gagal mengambil daftar role',
+            getDetail: 'Gagal mengambil detail role',
+            roleNameExists: 'Nama role sudah terdaftar',
+          }
+        },
       },
     },
   },
