@@ -157,4 +157,5 @@ export default {
   merchant: 'Merchant',
   action: 'Action',
   addRow: 'Add Row',
+  removeRow: 'Remove Row',
 }

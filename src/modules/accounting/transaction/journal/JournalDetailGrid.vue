@@ -315,7 +315,6 @@ const columns = computed(() => [
   {
     name: '',
     prop: 'action',
-    size: 50,
     readonly: true,
     cellTemplate: (h: any, { rowIndex }: any) => {
       return h('button', {
@@ -332,12 +331,12 @@ const columns = computed(() => [
           width: '100%',
           height: '100%',
         },
-        title: 'Hapus baris',
+        title: t("removeRow"),
         onclick: (e: MouseEvent) => {
           e.stopPropagation()
           removeRow(rowIndex)
         },
-      }, '×')
+      }, '❌')
     },
   }
 ])

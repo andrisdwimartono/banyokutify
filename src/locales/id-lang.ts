@@ -154,4 +154,5 @@ export default {
   merchant: 'Mitra',
   action: 'Aksi',
   addRow: 'Tambah Baris',
+  removeRow: 'Hapus Baris',
 }
