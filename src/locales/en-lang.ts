@@ -126,7 +126,10 @@ export default {
             getList: 'Failed to retrieve role list',
             getDetail: 'Failed to retrieve role detail',
             roleNameExists: 'Role name already exists',
-          }
+          },
+          ROLE_CREATED: 'Role successfully created',
+          ROLE_UPDATED: 'Role successfully updated',
+          ROLE_DELETED: 'Role successfully deleted',
         },
       },
     },

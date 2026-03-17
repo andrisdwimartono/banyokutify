@@ -2,6 +2,8 @@ import UserList from '@/modules/administration/master/user/UserList.vue'
 import UserForm from '@/modules/administration/master/user/UserForm.vue'
 import RoleList from '@/modules/administration/master/role/RoleList.vue'
 import RoleForm from '@/modules/administration/master/role/RoleForm.vue'
+import MerchantList from '@/modules/administration/master/merchant/MerchantList.vue'
+import MerchantForm from '@/modules/administration/master/merchant/MerchantForm.vue'
 import Login from '@/modules/administration/pages/Login.vue'
 
 export default [
@@ -66,6 +68,7 @@ export default [
           title: 'banyoku.administration.master._label',
         },
         children: [
+          // ------------------ USER -----------------------
           {
             path: 'user',
             name: 'user.list',
@@ -105,6 +108,7 @@ export default [
               title: 'banyoku.administration.master.user.create',
             },
           },
+          // ------------------ ROLE -----------------------
           {
             path: 'role',
             name: 'role.list',
@@ -120,7 +124,7 @@ export default [
           },
           {
             path: 'role/:id',
-            name: 'role.edit',
+            name: 'banyoku.administration.master.role.edit',
             icon: 'mdi-shield-account-outline',
             component: RoleForm,
             meta: {
@@ -133,7 +137,7 @@ export default [
           },
           {
             path: 'role/create',
-            name: 'role.create',
+            name: 'banyoku.administration.master.role.create',
             icon: 'mdi-shield-account-outline',
             component: RoleForm,
             meta: {
@@ -143,7 +147,47 @@ export default [
               isSidebar: false,
               title: 'banyoku.administration.master.role.create',
             },
-          }
+          },
+          // ------------------ MERCHANT -----------------------
+          {
+            path: 'merchant',
+            name: 'merchant.list',
+            icon: 'mdi-store-outline',
+            component: MerchantList,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: true,
+              title: 'banyoku.administration.master.merchant._label',
+            },
+          },
+          {
+            path: 'merchant/:id',
+            name: 'banyoku.administration.master.merchant.edit',
+            icon: 'mdi-store-outline',
+            component: MerchantForm,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: false,
+              title: 'banyoku.administration.master.merchant.edit',
+            },
+          },
+          {
+            path: 'merchant/create',
+            name: 'banyoku.administration.master.merchant.create',
+            icon: 'mdi-store-outline',
+            component: MerchantForm,
+            meta: {
+              requiresAuth: true,
+              roles: ['ADMIN'],
+              layout: 'main',
+              isSidebar: false,
+              title: 'banyoku.administration.master.merchant.create',
+            },
+          },
         ]
       }
     ]

@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
     import { ref, onMounted, computed } from 'vue'
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     import { useI18n } from 'vue-i18n'
     import { roleApi } from '@/services/api/administration/master/role/role.api'
     import type { RoleRequest } from '@/types/administration/master/role/role.request'
@@ -53,6 +53,8 @@
     import { useSnackbarStore } from '@/stores/snackbar.store'
 
     const route = useRoute();
+    const router = useRouter();
+    
     const { id: routeId } = route.params as { id?: string }
 
     const snackbar = useSnackbarStore()
@@ -99,9 +101,11 @@
             if (id.value) {
                 const res = await roleApi.update(id.value, roleRequest.value)
                 snackbar.show('Success', t(res.data.code), 'success')
+                router.push({ path: '/administration/master/role/' + id.value })
             } else {
                 const res = await roleApi.create(roleRequest.value)
                 snackbar.show('Success', t(res.data.code), 'success')
+                router.push({ path: '/administration/master/role/' + res.data.data.id })
             }
         } catch (err: any) {
             snackbar.show('Error', t(err.response.data.code), 'error')

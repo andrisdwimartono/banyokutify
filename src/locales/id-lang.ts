@@ -123,7 +123,10 @@ export default {
             getList: 'Gagal mengambil daftar role',
             getDetail: 'Gagal mengambil detail role',
             roleNameExists: 'Nama role sudah terdaftar',
-          }
+          },
+          ROLE_CREATED: 'Role berhasil dibuat',
+          ROLE_UPDATED: 'Role berhasil diubah',
+          ROLE_DELETED: 'Role berhasil dihapus',
         },
       },
     },
