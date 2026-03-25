@@ -61,40 +61,40 @@
      * Load merchant dari API
      */
     const loadMerchants = async (reset = false) => {
-    if (loading.value || !hasNextPage.value) return
-    loading.value = true
+      if (loading.value || !hasNextPage.value) return
+      loading.value = true
 
-    if (reset) {
-        page.value = 0
-        items.value = []
-        hasNextPage.value = true
-    }
+      if (reset) {
+          page.value = 0
+          items.value = []
+          hasNextPage.value = true
+      }
 
-    const res = await merchantApi.select({
-        page: page.value,
-        size,
-        search: search.value,
-    })
+      const res = await merchantApi.select({
+          page: page.value,
+          size,
+          search: search.value,
+      })
 
-    const content = res.data.data.content
-    totalElements.value = res.data.data.totalElements
+      const content = res.data.data.content
+      totalElements.value = res.data.data.totalElements
 
-    items.value.push(...content)
-    page.value++
+      items.value.push(...content)
+      page.value++
 
-    if (items.value.length >= totalElements.value) {
-        hasNextPage.value = false
-    }
+      if (items.value.length >= totalElements.value) {
+          hasNextPage.value = false
+      }
 
-    loading.value = false
-    }
+      loading.value = false
+      }
 
-    /**
-     * Search handler
-     */
-    const onSearch = (val: string) => {
-    search.value = val
-    loadMerchants(true)
+      /**
+       * Search handler
+       */
+      const onSearch = (val: string) => {
+      search.value = val
+      loadMerchants(true)
     }
 
     /**

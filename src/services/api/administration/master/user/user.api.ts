@@ -4,6 +4,8 @@ import type { UserRequest } from '@/types/administration/master/user/user.reques
 import type { UserUpdatePassword } from '@/types/administration/master/user/user.update.password'
 import type { ApiResponse } from '@/types/api/apiResponse'
 import type { ApiListResponse } from '@/types/api/apiListResponse'
+import type { ApiContentResponse } from '@/types/api/apiContentResponse'
+import type { UserSelect } from '@/types/administration/master/user/user.select'
 
 export const userApi = {
   getAll(params: any) {
@@ -23,5 +25,15 @@ export const userApi = {
   },
   delete(id: string) {
     return api.delete<ApiResponse<User>>(`/users/${id}`)
+  },
+  async select(params: {
+    page: number
+    size: number
+    search?: string
+  }) {
+    return api.get<ApiContentResponse<UserSelect>>(
+      '/users/select',
+      { params }
+    )
   }
 }
