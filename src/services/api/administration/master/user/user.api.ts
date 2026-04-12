@@ -6,13 +6,14 @@ import type { ApiResponse } from '@/types/api/apiResponse'
 import type { ApiListResponse } from '@/types/api/apiListResponse'
 import type { ApiContentResponse } from '@/types/api/apiContentResponse'
 import type { UserSelect } from '@/types/administration/master/user/user.select'
+import type { UserResponse } from '@/types/administration/master/user/user.response'
 
 export const userApi = {
   getAll(params: any) {
     return api.get<ApiListResponse<User>>('/users', { params })
   },
   getUser(id: string) {
-    return api.get<ApiResponse<UserRequest>>(`/users/${id}`)
+    return api.get<ApiResponse<UserResponse>>(`/users/${id}`)
   },
   create(payload: UserRequest) {
     return api.post<ApiResponse<UserRequest>>('/users', payload)

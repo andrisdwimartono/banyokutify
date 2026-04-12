@@ -21,7 +21,25 @@
         <v-btn :style="{marginRight: '1rem', height: '48px', padding: '4px 12px'}">
             <div style="display: flex; align-items: center; gap: 0;">
                 <v-avatar size="40">
-                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="{{ auth.fullName }}">
+                    <v-progress-circular
+                        v-if="profilePictureLoading"
+                        indeterminate
+                        size="20"
+                        color="primary"
+                    />
+                    <v-img
+                        v-if="profilePictureUrl"
+                        :src="profilePictureUrl"
+                        :alt="auth.fullName"
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                    />
+                    <v-icon
+                        v-else
+                        icon="mdi-account"
+                        size="40"
+                        color="primary"
+                        style="background-color: rgba(var(--v-theme-on-surface), 0.08);"
+                    />
                 </v-avatar>
                 <div style="display: flex; align-items: center; height: 40px; padding: 0 12px; background-color: rgba(var(--v-theme-on-surface), 0.08); border-radius: 4px;">
                     <span style="font-size: 14px; font-weight: 500;">{{ auth.fullName }}</span>
@@ -54,8 +72,10 @@
     </v-app-bar>
 </template>
 <script lang="ts" setup>
+    import { ref, onMounted } from 'vue'
     import { useAuthStore } from '@/stores/auth.store'
     import { useRouter } from 'vue-router'
+    import { fileManagementApi } from '@/services/api/file-management/file-management.api'
     const auth = useAuthStore()
     const router = useRouter()
 
@@ -65,6 +85,9 @@
     const theme = defineModel<string>('theme');
     const locale = defineModel<string>('locale');
 
+    const profilePictureUrl = ref<string | undefined>(undefined)
+    const profilePictureLoading = ref<boolean>(true)
+
     const logout = () => {
         try {
             auth.logout()
@@ -73,6 +96,16 @@
             console.log(error)
         }
     }
+
+    onMounted(async () => {
+        if (auth.profilePictureFileId) {
+            profilePictureLoading.value = true
+            profilePictureUrl.value = await fileManagementApi.getFileUrl(auth.profilePictureFileId)
+            profilePictureLoading.value = false
+        }else{
+            profilePictureLoading.value = false
+        }
+    })
 </script>
 
 <style scoped>

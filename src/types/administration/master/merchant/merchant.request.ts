@@ -1,7 +1,7 @@
 export interface MerchantRequest {
   id: string
   merchantName: string
-  merchantLogo?: File | string | null
+  logoFileId?: string | null
   ownerUserId: string | null
   status: number
 }

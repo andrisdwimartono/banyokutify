@@ -2,6 +2,7 @@ export default {
   banyoku: {
     home: 'Home',
     dashboard: 'Dashboard',
+    profile: 'Profile',
 
     stock: {
       _label: 'Stock',
@@ -218,4 +219,10 @@ export default {
   action: 'Action',
   addRow: 'Add Row',
   removeRow: 'Remove Row',
+  back: 'Back',
+  fileUpload: {
+    title: 'Drag and drop files here',
+    divider: 'or',
+    browse: 'Browse files',
+  },
 }

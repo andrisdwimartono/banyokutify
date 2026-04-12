@@ -18,6 +18,7 @@
       <v-container
         fluid
         class="d-flex flex-column align-start"
+        style="background-color: rgba(var(--v-theme-on-surface), 0.08); min-height: 100%;"
       >
         <PageInformation />
         <v-card

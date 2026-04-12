@@ -1,11 +1,9 @@
-export interface UserRequest {
+export interface UserResponse {
   id: string
   email: string
   roles: string[]
   fullName: string
   profilePictureFileId: string
-  profilePictureFileIdUrl: string
   merchantId: string | null
-  password?: string
-  passwordConfirmation?: string
+  merchantName: string | null
 }

@@ -70,23 +70,23 @@ export const token = {
     localStorage.removeItem(FULL_NAME_KEY)
   },
 
-  getProfilePicture() {
+  getprofilePictureFileId() {
     return localStorage.getItem(PROFILE_PICTURE_KEY)
   },
-  setProfilePicture(value: string) {
+  setprofilePictureFileId(value: string) {
     localStorage.setItem(PROFILE_PICTURE_KEY, value)
   },
-  removeProfilePicture() {
+  removeprofilePictureFileId() {
     localStorage.removeItem(PROFILE_PICTURE_KEY)
   },
 
-  getProfilePictureUrl() {
+  getprofilePictureFileIdUrl() {
     return localStorage.getItem(PROFILE_PICTURE_URL_KEY)
   },
-  setProfilePictureUrl(value: string) {
+  setprofilePictureFileIdUrl(value: string) {
     localStorage.setItem(PROFILE_PICTURE_URL_KEY, value)
   },
-  removeProfilePictureUrl() {
+  removeprofilePictureFileIdUrl() {
     localStorage.removeItem(PROFILE_PICTURE_URL_KEY)
   },
 

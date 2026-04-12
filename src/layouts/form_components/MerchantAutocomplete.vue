@@ -9,6 +9,7 @@
     clearable
     :label="label"
     @update:search="onSearch"
+    return-object
   >
     <!-- Custom item -->
     <template #item="{ props, item }">
@@ -38,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue'
+    import { ref, watch, onMounted } from 'vue'
     import { merchantApi } from '@/services/api/administration/master/merchant/merchant.api'
     import type { MerchantSelect } from '@/types/administration/master/merchant/merchant.select'
     import { useI18n } from 'vue-i18n'
@@ -46,7 +47,7 @@
 
     defineProps<{ label?: string }>()
 
-    const modelValue = defineModel<string | null>()
+    const modelValue = defineModel<MerchantSelect | null>()
 
     const items = ref<MerchantSelect[]>([])
     const loading = ref(false)
@@ -57,56 +58,77 @@
 
     const hasNextPage = ref(true)
 
+    let fetchId = 0
+    let searchTimeout: ReturnType<typeof setTimeout> | null = null
+
     /**
      * Load merchant dari API
      */
     const loadMerchants = async (reset = false) => {
-      if (loading.value || !hasNextPage.value) return
-      loading.value = true
-
       if (reset) {
-          page.value = 0
-          items.value = []
-          hasNextPage.value = true
-      }
+            page.value = 0
+            items.value = []
+            hasNextPage.value = true
+        } else {
+            if (loading.value || !hasNextPage.value) return
+        }
+        const currentFetchId = ++fetchId
+        loading.value = true
 
-      const res = await merchantApi.select({
-          page: page.value,
-          size,
-          search: search.value,
-      })
+        try {
+            const res = await merchantApi.select({
+                page: page.value,
+                size,
+                search: search.value || '',
+            })
 
-      const content = res.data.data.content
-      totalElements.value = res.data.data.totalElements
+            if (currentFetchId !== fetchId) return // Request superseded
 
-      items.value.push(...content)
-      page.value++
+            const content = res.data.data.content
+            totalElements.value = res.data.data.totalElements
 
-      if (items.value.length >= totalElements.value) {
-          hasNextPage.value = false
-      }
+            items.value.push(...content)
+            page.value++
 
-      loading.value = false
-      }
+            if (items.value.length >= totalElements.value) {
+                hasNextPage.value = false
+            }
+        } finally {
+            if (currentFetchId === fetchId) {
+                loading.value = false
+            }
+        }
+    }
 
-      /**
-       * Search handler
-       */
-      const onSearch = (val: string) => {
-      search.value = val
-      loadMerchants(true)
+    /**
+     * Search handler
+     */
+    const onSearch = (val: string) => {
+      search.value = val || ''
+        if (searchTimeout) clearTimeout(searchTimeout)
+        searchTimeout = setTimeout(() => {
+            loadMerchants(true)
+        }, 300)
     }
 
     /**
      * Trigger saat sentinel muncul (scroll mentok)
      */
     const onIntersect = (isIntersecting: boolean) => {
-    if (isIntersecting) {
-        loadMerchants()
-    }
+        if (isIntersecting) {
+            loadMerchants()
+        }
     }
 
+    watch(modelValue, (newVal) => {
+        if (!newVal && search.value) {
+            search.value = ''
+            if (searchTimeout) clearTimeout(searchTimeout)
+            loadMerchants(true)
+        }
+    })
+
     onMounted(() => {
-    loadMerchants(true)
+      loadMerchants(true)
     })
 </script>

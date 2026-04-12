@@ -2,6 +2,7 @@ export default {
   banyoku: {
     home: 'Beranda',
     dashboard: 'Dashboard',
+    profile: 'Profil',
 
     stock: {
       _label: 'Stok',
@@ -215,4 +216,10 @@ export default {
   action: 'Aksi',
   addRow: 'Tambah Baris',
   removeRow: 'Hapus Baris',
+  back: 'Kembali',
+  fileUpload: {
+    title: 'Tarik dan lepas file di sini',
+    divider: 'atau',
+    browse: 'Pilih file',
+  },
 }

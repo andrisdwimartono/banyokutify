@@ -1,9 +1,6 @@
 <template>
     <v-card-title class="d-flex align-center pe-2">
-      <!-- <v-icon icon="mdi-format-list-bulleted"></v-icon> &nbsp;
-      {{ t('banyoku.administration.master.user.list') }} -->
-       <!-- button add -->
-       <v-btn
+      <v-btn
         color="primary"
         prepend-icon="mdi-plus"
         @click="$router.push('/administration/master/user/create')"
@@ -24,7 +21,6 @@
         single-line
       ></v-text-field>
     </v-card-title>
-    <!-- border table -->
     <v-data-table-server
         :search="search"
         :headers="headers"
@@ -42,12 +38,24 @@
       {{ index + 1 + pageOffset }}
     </template>
 
+    <!-- COLUMN: ROLES -->
+    <template #item.roles="{ value }">
+        {{ value }}
+    </template>
+
     <!-- 🖼 COLUMN: PROFILE PICTURE -->
-    <template #item.profilePicture="{ value, item }">
+    <template #item.profilePictureFileId="{ value, item }">
       <v-avatar v-if="value" size="40">
-        <v-img :src="value" :alt="item.fullName" />
+        <v-img :src="fileManagementApi.getFileUrl(value)" :alt="item.fullName" />
       </v-avatar>
-      <span v-else>-</span>
+      <v-icon
+          v-else
+          icon="mdi-account"
+          size="40"
+          color="primary"
+          style="background-color: rgba(var(--v-theme-on-surface), 0.08);"
+          class="rounded-circle"
+      />
     </template>
 
     <!-- ACTION COLUMN -->
@@ -56,6 +64,12 @@
         icon="mdi-pencil-outline"
         color="primary"
         @click="$router.push(`/administration/master/user/${item.id}`)"
+      ></v-icon>
+      <!-- assign role -->
+      <v-icon
+        icon="mdi-account-key-outline"
+        color="primary"
+        @click="$router.push(`/administration/master/user/${item.id}/assign-role`)"
       ></v-icon>
     </template>
     </v-data-table-server>
@@ -68,6 +82,7 @@
     import type { ApiContentResponse } from '@/types/api/apiContentResponse'
     import { useI18n } from 'vue-i18n'
     import { mapVuetifyToPageable } from '@/helpers/datatable.helper'
+    import { fileManagementApi } from '@/services/api/file-management/file-management.api'
     const { t } = useI18n()
 
     const users = ref<ApiContentResponse<User>>()
@@ -89,25 +104,37 @@
     const headers = computed(() => [
         // { title: t('id'), key: 'id' },
         {
-            title: t('no'),
-            key: 'no',
-            sortable: false,
+          title: t('no'),
+          key: 'no',
+          sortable: false,
         },
-        { title: t('banyoku.administration.master.user.email'), key: 'email' },
-        { title: t('banyoku.administration.master.user.roles'), key: 'roles', sortable: false },
-        { title: t('banyoku.administration.master.user.fullName'), key: 'fullName' },
-        // show as image if not null
-        { title: t('banyoku.administration.master.user.profilePicture'), key: 'profilePicture', sortable: false, 
-            cellRenderer: (params: { value: string, row: { data: { fullName: string } } }) => {
-                if (params.value) {
-                    return `<img src="${params.value}" alt="${params.row.data.fullName}" style="width: 40px; height: 40px; border-radius: 50%;">`
-                }
-                return ''
-            }
+        { 
+          title: t('banyoku.administration.master.user.email'),
+          key: 'email'
         },
-        { title: t('banyoku.administration.master.user.merchantName'), key: 'merchantName' },
-        // action
-        { title: t('action'), key: 'action', sortable: false},
+        {
+          title: t('banyoku.administration.master.user.roles'),
+          key: 'roles',
+          sortable: false
+        },
+        {
+          title: t('banyoku.administration.master.user.fullName'),
+          key: 'fullName'
+        },
+        {
+          title: t('banyoku.administration.master.user.profilePicture'),
+          key: 'profilePictureFileId',
+          sortable: false,
+        },
+        {
+          title: t('banyoku.administration.master.user.merchantName'),
+          key: 'merchantName'
+        },
+        {
+          title: t('action'),
+          key: 'action',
+          sortable: false
+        },
     ])
 
     onMounted(() => {

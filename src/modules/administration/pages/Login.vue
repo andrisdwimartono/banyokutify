@@ -46,6 +46,7 @@
         />
 
         <v-text-field
+          class="mt-4"
           v-model="form.password"
           :label="t('login.password')"
           prepend-inner-icon="mdi-lock"
@@ -165,8 +166,8 @@ async function onSubmit() {
       email: res.data.data.email,
       roles: res.data.data.roles,
       fullName: res.data.data.fullName || '',
-      profilePicture: res.data.data.profilePicture || '',
-      profilePictureUrl: res.data.data.profilePictureUrl || '',
+      profilePictureFileId: res.data.data.profilePictureFileId || '',
+      profilePictureFileIdUrl: res.data.data.profilePictureFileIdUrl || '',
       merchantId: res.data.data.merchantId || '',
       merchantName: res.data.data.merchantName || '',
       accessToken: res.data.data.accessToken,

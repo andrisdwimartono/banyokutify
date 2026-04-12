@@ -3,8 +3,8 @@ export interface User {
   email: string
   roles: string[]
   fullName: string
-  profilePicture: string
-  profilePictureUrl: string
+  profilePictureFileId: string
+  profilePictureFileIdUrl: string
   merchantId: string
   merchantName: string
 }

@@ -6,7 +6,7 @@
         <v-card-title class="d-flex align-center gap-4">
           <v-avatar size="72">
             <v-img
-              :src="user.profilePictureUrl || defaultAvatar"
+              :src="user.profilePictureFileIdUrl || defaultAvatar"
               alt="Profile Picture"
             />
           </v-avatar>
@@ -34,14 +34,14 @@
             <v-list-item>
               <v-list-item-title>Profile Picture</v-list-item-title>
               <v-list-item-subtitle>
-                {{ user.profilePicture || 'Not Set' }}
+                {{ user.profilePictureFileId || 'Not Set' }}
               </v-list-item-subtitle>
             </v-list-item>
 
             <v-list-item>
               <v-list-item-title>Profile Picture URL</v-list-item-title>
               <v-list-item-subtitle class="text-break">
-                {{ user.profilePictureUrl || 'Not Set' }}
+                {{ user.profilePictureFileIdUrl || 'Not Set' }}
               </v-list-item-subtitle>
             </v-list-item>
           </v-list>

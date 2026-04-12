@@ -34,12 +34,24 @@ export default createVuetify({
       density: 'comfortable',
       hideDetails: 'auto',
     },
+    VSelect: {
+      variant: 'solo',
+      rounded: 'lg',
+      density: 'comfortable',
+      hideDetails: 'auto',
+    },
     VBtn: {
       rounded: 'lg',
       height: 44,
     },
     VCard: {
       rounded: 'xl',
-    }
+    },
+    VFileInput: {
+      variant: 'solo',
+      rounded: 'lg',
+      density: 'comfortable',
+      hideDetails: 'auto',
+    },
   },
 })

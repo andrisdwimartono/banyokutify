@@ -7,8 +7,8 @@ export const useAuthStore = defineStore('auth', {
     email: token.getEmail() || '',
     roles: token.getRoles() || [],
     fullName: token.getFullName() || '',
-    profilePicture: token.getProfilePicture() || '',
-    profilePictureUrl: token.getProfilePictureUrl() || '',
+    profilePictureFileId: token.getprofilePictureFileId() || '',
+    profilePictureFileIdUrl: token.getprofilePictureFileIdUrl() || '',
     merchantId: token.getMerchantId() || '',
     merchantName: token.getMerchantName() || '',
     accessToken: token.getAccess() || '',
@@ -27,8 +27,8 @@ export const useAuthStore = defineStore('auth', {
       email: string
       roles: string[]
       fullName: string
-      profilePicture: string
-      profilePictureUrl: string
+      profilePictureFileId: string
+      profilePictureFileIdUrl: string
       merchantId: string
       merchantName: string
       accessToken: string
@@ -38,8 +38,8 @@ export const useAuthStore = defineStore('auth', {
       this.email = payload.email
       this.roles = payload.roles
       this.fullName = payload.fullName
-      this.profilePicture = payload.profilePicture
-      this.profilePictureUrl = payload.profilePictureUrl
+      this.profilePictureFileId = payload.profilePictureFileId
+      this.profilePictureFileIdUrl = payload.profilePictureFileIdUrl
       this.merchantId = payload.merchantId
       this.merchantName = payload.merchantName
       this.accessToken = payload.accessToken
@@ -51,8 +51,8 @@ export const useAuthStore = defineStore('auth', {
       token.setEmail(payload.email)
       token.setRoles(payload.roles)
       token.setFullName(payload.fullName)
-      token.setProfilePicture(payload.profilePicture)
-      token.setProfilePictureUrl(payload.profilePictureUrl)
+      token.setprofilePictureFileId(payload.profilePictureFileId)
+      token.setprofilePictureFileIdUrl(payload.profilePictureFileIdUrl)
       token.setMerchantId(payload.merchantId)
       token.setMerchantName(payload.merchantName)
     },
@@ -63,8 +63,8 @@ export const useAuthStore = defineStore('auth', {
         email: token.getEmail(),
         roles: token.getRoles(),
         fullName: token.getFullName(),
-        profilePicture: token.getProfilePicture(),
-        profilePictureUrl: token.getProfilePictureUrl(),
+        profilePictureFileId: token.getprofilePictureFileId(),
+        profilePictureFileIdUrl: token.getprofilePictureFileIdUrl(),
         merchantId: token.getMerchantId(),
         merchantName: token.getMerchantName(),
         accessToken: token.getAccess(),
