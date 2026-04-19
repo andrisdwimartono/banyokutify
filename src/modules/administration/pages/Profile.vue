@@ -75,7 +75,7 @@
     const user = ref<any>({})
     onMounted(async () => {
         user.value = await profileApi.getProfile().then((res) => {
-            return res.data
+            return res.data.data
         })
     })
 </script>

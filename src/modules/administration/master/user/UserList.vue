@@ -69,17 +69,68 @@
       <v-icon
         icon="mdi-account-key-outline"
         color="primary"
-        @click="$router.push(`/administration/master/user/${item.id}/assign-role`)"
+        @click="editRoles(item)"
       ></v-icon>
     </template>
     </v-data-table-server>
-</template>
 
+    <v-dialog
+      v-model="dialog"
+      max-width="80%"
+    >
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Assign Role</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <template v-for="roleUserWithStatus in allRolesWithUserRolesStatusList">
+                  <v-checkbox
+                    v-if="roleUserWithStatus.isAssigned"
+                    v-model="roleUserWithStatus.roleId" 
+                    :label="roleUserWithStatus.roleName"
+                    :value="roleUserWithStatus.roleId"
+                  ></v-checkbox>
+                  <v-checkbox
+                    v-else
+                    :label="roleUserWithStatus.roleName"
+                    :value="roleUserWithStatus.roleId"
+                  ></v-checkbox>
+                </template>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="blue-darken-1"
+            variant="text"
+            @click="dialog = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            color="blue-darken-1"
+            variant="text"
+            @click="saveUserRoles"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</template>
 <script setup lang="ts">
     import { ref, onMounted, computed } from 'vue'
     import { userApi } from '@/services/api/administration/master/user/user.api'
     import type { User } from '@/types/administration/master/user/user.entity'
+    import type { AllRolesWithUserRolesStatus } from '@/types/administration/master/user_role/all_role_available_user.entity'
     import type { ApiContentResponse } from '@/types/api/apiContentResponse'
+    import { userRoleApi } from '@/services/api/administration/master/user_role/user_role.api'
     import { useI18n } from 'vue-i18n'
     import { mapVuetifyToPageable } from '@/helpers/datatable.helper'
     import { fileManagementApi } from '@/services/api/file-management/file-management.api'
@@ -92,6 +143,7 @@
         page: 1,
         itemsPerPage: 10,
     })
+    const allRolesWithUserRolesStatusList = ref<AllRolesWithUserRolesStatus[]>([])
 
     const pageOffset = computed(() => {
         return (pagination.value.page - 1) * pagination.value.itemsPerPage
@@ -99,6 +151,19 @@
 
     const loading = ref(false)
     const search = ref('')
+    const dialog = ref(false)
+    const roles = ref<string[]>([])
+
+    const editRoles = async (item: User) => {
+        dialog.value = true
+
+        const res = await userRoleApi.getAllRolesWithUserRolesStatus(item.id)
+        allRolesWithUserRolesStatusList.value = res.data.data
+    }
+
+    const saveUserRoles = () => {
+        dialog.value = false
+    }
 
     // hide column id, merchantId
     const headers = computed(() => [

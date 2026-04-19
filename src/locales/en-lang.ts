@@ -3,6 +3,7 @@ export default {
     home: 'Home',
     dashboard: 'Dashboard',
     profile: 'Profile',
+    logout: 'Logout',
 
     stock: {
       _label: 'Stock',
@@ -91,6 +92,9 @@ export default {
             create: 'User successfully created',
             update: 'User successfully updated',
             delete: 'User successfully deleted',
+            createUser: 'User successfully created',
+            updateUser: 'User successfully updated',
+            deleteUser: 'User successfully deleted',
           },
           error: {
             _label: 'Error',
@@ -101,6 +105,10 @@ export default {
             delete: 'Failed to delete user',
             emailExists: 'Email already exists',
             passwordConfirmation: 'Password confirmation does not match', 
+            userNotFound: 'User not found',
+            createUser: 'Failed to create user',
+            updateUser: 'Failed to update user',
+            deleteUser: 'Failed to delete user',
           }
         },
         role: {

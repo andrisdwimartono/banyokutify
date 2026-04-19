@@ -3,6 +3,7 @@ export default {
     home: 'Beranda',
     dashboard: 'Dashboard',
     profile: 'Profil',
+    logout: 'Keluar',
 
     stock: {
       _label: 'Stok',
@@ -98,6 +99,10 @@ export default {
             getDetail: 'Gagal mengambil detail pengguna',
             emailExists: 'Email sudah terdaftar',
             passwordConfirmation: 'Kata sandi tidak sesuai', 
+            userNotFound: 'Pengguna tidak ditemukan',
+            createUser: 'Gagal membuat pengguna',
+            updateUser: 'Gagal mengubah pengguna',
+            deleteUser: 'Gagal menghapus pengguna',
           }
         },
         role: {
