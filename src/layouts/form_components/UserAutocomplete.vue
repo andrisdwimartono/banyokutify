@@ -15,7 +15,7 @@
     <template #item="{ props, item }">
       <v-list-item v-bind="props">
         <v-list-item-subtitle>
-          ID: {{ item.raw.id }}
+          ID: {{ item.id }}
         </v-list-item-subtitle>
       </v-list-item>
     </template>
