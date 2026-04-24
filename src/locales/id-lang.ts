@@ -85,6 +85,7 @@ export default {
           profilePicture: 'Foto Profil',
           merchantId: 'ID Merchant',
           merchantName: 'Nama Merchant',
+          assignRole: 'Tetapkan Role',
           success: {
             _label: 'Success',
             getList: 'Daftar pengguna berhasil diambil',

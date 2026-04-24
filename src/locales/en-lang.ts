@@ -85,6 +85,7 @@ export default {
           profilePicture: 'Profile Picture',
           merchantId: 'Merchant ID',
           merchantName: 'Merchant Name',
+          assignRole: 'Assign Role',
           success: {
             _label: 'Success',
             getList: 'User list successfully retrieved',
