@@ -88,18 +88,16 @@
 
     try {
         const payload: any = {
-            id: selectedUser.value.id,
+            userId: selectedUser.value.id,
             roles: selectedRoles.value.map(roleId => {
                 return {
-                    roleId,
-                    userId: selectedUser.value?.id
+                    roleId
                 }
             })
         }
 
-        // const res = await userRoleApi.setRoles(payload)
-        console.log(payload)
-        snackbar.show('Success', t('Success'), 'success')
+        const res = await userRoleApi.updateUserRoles(selectedUser.value.id, payload)
+        snackbar.show('Success', t(res.data.message), 'success')
         dialog.value = false
     } catch (err: any) {
         snackbar.show('Error', t(err.response?.data?.code || 'Error'), 'error')
@@ -107,7 +105,6 @@
   }
 
   watch(item, (newVal) => {
-    console.log(newVal)
     if(newVal && newVal !== undefined){
       selectedUser.value = newVal
       getAllRolesWithUserRolesStatus(selectedUser.value)
